@@ -5,7 +5,6 @@ This repository contains the source code and supporting documentation for an aut
 ## Project Overview
 The control system introduced in this repository is designed to optimize the anaerobic digestion process by automating the control of feeding intervals based on the microbial activity in the reactor. By monitoring the current draw, which correlates with the bacterial metabolic rate, the FSM facilitates real-time adjustments to feeding based on changes in organic load.
 
-![Uploading state_machine.png…]()
 
 
 ### Highlights
