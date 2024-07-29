@@ -14,9 +14,8 @@ The control system introduced in this repository is designed to optimize the ana
 - **Scalability and Reduced Oversight**: Successfully tested in lab-scale reactors with potential scalability for industrial applications.
 
 ## Repository Contents
-- `src/` - Contains all source code files for the FSM and control system.
-- `docs/` - Documentation on system setup, operation, and research findings.
-- `data/` - Example datasets used in simulations and tests.
+- `src/` - Contains all source code files for micro controller firmware
+- `reactor_controll/main.py` - Primary operation script
 
 ## System Requirements
 - Python 3.x
