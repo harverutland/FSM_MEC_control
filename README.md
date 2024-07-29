@@ -22,8 +22,10 @@ The control system introduced in this repository is designed to optimize the ana
 - Adafruit Libraries for hardware control
 
 Thanks to all collaborators and advisors who have contributed to the project.
-University of Bristol 
-University of Westminster 
-WASE 
+- University of Bristol
+- University of West England
+- University of Westminster
+- WASE 
+
 
 
