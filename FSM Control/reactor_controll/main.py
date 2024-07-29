@@ -5,7 +5,7 @@ import subprocess
 
 subprocess.Popen(['python3', 'server_DAC.py'])
 # Initialize the current monitor
-reactor_monitor = CurrentMonitor('169.254.7.224', 'NGP824', 'NGP824', '/int/logging')
+reactor_monitor = CurrentMonitor('****', 'NGP824', 'NGP824', '/int/logging') # Use with rohde and schwarz logging power supply, this section of code can be adjusted to work with other PSU hardware
 
 # Initialize the reactor controller
 controller = ReactorController()
