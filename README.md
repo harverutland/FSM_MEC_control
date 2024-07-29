@@ -2,11 +2,6 @@
 
 This repository contains the source code and supporting documentation for an automated control system for microbial electrolysis cells (MEC) and anaerobic digestion (AD) systems, developed at the University of Bristol. This project leverages a Finite State Machine (FSM) for real-time control of feeding events in a lab-scale, single-chamber MEC-AD reactor.
 
-## Research Team
-- **Harvey Rutland** - School of Computer Science, Electrical and Electronic Engineering, and Engineering Maths, University of Bristol
-- **Kyle Bowman** - School of Engineering, University of the West of England
-- **Thomas Fudge**, **Emma Crossley**, **Godfrey Kyazze**, **Haixia Liu**, **Jiseon You** - School of Life Sciences, University of Westminster
-
 ## Project Overview
 The control system introduced in this repository is designed to optimize the anaerobic digestion process by automating the control of feeding intervals based on the microbial activity in the reactor. By monitoring the current draw, which correlates with the bacterial metabolic rate, the FSM facilitates real-time adjustments to feeding based on changes in organic load.
 
