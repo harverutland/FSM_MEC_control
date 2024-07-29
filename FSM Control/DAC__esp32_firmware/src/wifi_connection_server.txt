@@ -1,0 +1,91 @@
+#include <WiFi.h>
+#include <ArduinoOTA.h>
+#include <Adafruit_MCP4728.h>
+#include <Wire.h>
+#include <HTTPClient.h>
+
+// WiFi credentials
+const char* ssid = "TP-Link_70A6";     // Replace with your WiFi SSID
+const char* password = "59025306";     // Replace with your WiFi password
+
+// Flask server URL
+const char* serverUrl = "http://192.168.0.106:5000/data"; // Replace with your server's IP and port
+
+// Static IP address configuration
+IPAddress staticIP(192, 168, 0, 184); // Static IP address
+IPAddress gateway(192, 168, 0, 1);    // Gateway IP address
+IPAddress subnet(255, 255, 255, 0);   // Subnet mask
+
+// MCP4728 DAC
+Adafruit_MCP4728 mcp;
+
+unsigned long previousMillis = 0; // Will store last time data was sent
+const long interval = 10000;      // Interval at which to send data (10 seconds)
+
+void sendDataToServer();
+
+void setup() {
+  Serial.begin(115200);
+
+  WiFi.config(staticIP, gateway, subnet);
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.println("Connecting to WiFi...");
+  }
+  Serial.print("Connected to WiFi, IP address: ");
+  Serial.println(WiFi.localIP());
+
+  ArduinoOTA.setHostname("MyDeviceName");
+  ArduinoOTA.begin();
+
+  if (!mcp.begin(0x64)) {
+    while (1) {
+      delay(10);
+      Serial.println("Failed to find MCP4728 chip");
+    }
+  }
+
+  uint16_t dacValue = (1.8 / 3.3) * 4095;
+  mcp.setChannelValue(MCP4728_CHANNEL_A, dacValue);
+  mcp.setChannelValue(MCP4728_CHANNEL_B, dacValue);
+  mcp.setChannelValue(MCP4728_CHANNEL_C, dacValue);
+  mcp.setChannelValue(MCP4728_CHANNEL_D, dacValue);
+  Serial.println("DAC channels set to 1.8V");
+}
+
+void loop() {
+  ArduinoOTA.handle();
+
+  unsigned long currentMillis = millis();
+  if (currentMillis - previousMillis >= interval) {
+    previousMillis = currentMillis;
+
+    if(WiFi.status() == WL_CONNECTED) {
+      sendDataToServer();
+    } else {
+      Serial.println("WiFi not connected");
+    }
+  }
+}
+
+void sendDataToServer() {
+  HTTPClient http;
+  http.begin(serverUrl);
+  http.addHeader("Content-Type", "application/x-www-form-urlencoded");
+
+  String httpRequestData = "key1=value1&key2=value2";
+  int httpResponseCode = http.POST(httpRequestData);
+
+  if(httpResponseCode>0) {
+    String response = http.getString();
+    Serial.println(httpResponseCode);
+    Serial.println(response);
+
+  } else {
+    Serial.print("Error on sending POST: ");
+    Serial.println(httpResponseCode);
+  }
+
+  http.end();
+}

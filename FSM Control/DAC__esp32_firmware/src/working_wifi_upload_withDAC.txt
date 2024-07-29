@@ -1,0 +1,60 @@
+#include <WiFi.h>
+#include <ArduinoOTA.h>
+#include <Adafruit_MCP4728.h>
+#include <Wire.h>
+
+// WiFi credentials
+const char* ssid = "TP-Link_70A6";     // Replace with your WiFi SSID
+const char* password = "59025306";     // Replace with your WiFi password
+
+// Static IP address configuration
+IPAddress staticIP(192, 168, 0, 184); // Static IP address
+IPAddress gateway(192, 168, 0, 1);    // Gateway IP address
+IPAddress subnet(255, 255, 255, 0);   // Subnet mask
+
+// MCP4728 DAC
+Adafruit_MCP4728 mcp;
+
+void setup() {
+  // Initialize serial communication
+  Serial.begin(115200);
+
+  // Initialize WiFi
+  WiFi.config(staticIP, gateway, subnet);
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.println("Connecting to WiFi...");
+  }
+  Serial.println("Connected to WiFi, IP address: ");
+  Serial.println(WiFi.localIP());
+
+  // Initialize OTA
+  ArduinoOTA.setHostname("MyDeviceName"); // Set the OTA device name
+  ArduinoOTA.begin();
+
+  // Initialize MCP4728
+  Serial.println("Adafruit MCP4728 test!");
+  if (!mcp.begin(0x64)) { // Replace 0x64 with your MCP4728's I2C address
+    while (1) {
+      delay(10);
+      Serial.println("Failed to find MCP4728 chip");
+    }
+  }
+
+  // Calculate the DAC value for 1.8V
+  uint16_t dacValue = (1.8 / 3.3) * 4095;
+  
+  // Set all channels to 1.8V
+  mcp.setChannelValue(MCP4728_CHANNEL_A, dacValue);
+  mcp.setChannelValue(MCP4728_CHANNEL_B, dacValue);
+  mcp.setChannelValue(MCP4728_CHANNEL_C, dacValue);
+  mcp.setChannelValue(MCP4728_CHANNEL_D, dacValue);
+
+  Serial.println("DAC channels set to 1.8V");
+}
+
+void loop() {
+  ArduinoOTA.handle(); // Handle OTA updates
+  delay(1000);
+}
