@@ -20,4 +20,9 @@ The control system introduced in this repository is designed to optimize the ana
 - Adafruit Libraries for hardware control
 - Additional requirements are listed in the `requirements.txt` file.
 
+Thanks to all collaborators and advisors who have contributed to the project.
+University of Bristol 
+University of Westminster 
+WASE 
+
 
