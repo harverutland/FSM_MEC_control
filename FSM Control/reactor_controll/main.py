@@ -10,8 +10,8 @@ reactor_monitor = CurrentMonitor('****', 'NGP824', 'NGP824', '/int/logging') # U
 # Initialize the reactor controller
 controller = ReactorController()
 
-R1_treshold = 60   #45
-R2_treshold = 20  #8
+R1_treshold = ** #To be manually adjusted based on reactor current state
+R2_treshold = ** #To be manually adjusted based on reactor current state
 
 R1_feed_times = {'p1': '172000', 'p2': '28000'}
 R2_feed_times = {'p3': '172000', 'p4': '28000'}
