@@ -4,13 +4,13 @@
 #include <Wire.h>
 
 // WiFi credentials
-const char* ssid = "TP-Link_70A6";     // Replace with your WiFi SSID
-const char* password = "59025306";     // Replace with your WiFi password
+const char* ssid = "****";     // Replace with your WiFi SSID
+const char* password = "****";     // Replace with your WiFi password
 
 // Static IP address configuration
-IPAddress staticIP(192, 168, 0, 184); // Static IP address
-IPAddress gateway(192, 168, 0, 1);    // Gateway IP address
-IPAddress subnet(255, 255, 255, 0);   // Subnet mask
+IPAddress staticIP(****); // Static IP address
+IPAddress gateway(****);    // Gateway IP address
+IPAddress subnet(****);   // Subnet mask
 
 // MCP4728 DAC
 Adafruit_MCP4728 mcp;
