@@ -1,6 +1,6 @@
 # FSM-Based Microbial Electrolysis Cell (MEC) and Anaerobic Digestion (AD) Control System
 
-This repository contains the source code and supporting documentation for an automated control system for microbial electrolysis cells (MEC) and anaerobic digestion (AD) systems. This project leverages a Finite State Machine (FSM) for real-time control of feeding events in a lab-scale, single-chamber MEC-AD reactor.
+The control system introduced in this repository is designed to optimize the anaerobic digestion process by automating the control of feeding intervals based on the microbial activity in the reactor. By monitoring the current draw, which correlates with the bacterial metabolic rate, the FSM facilitates real-time adjustments to feeding based on changes in organic load. The Digital-to-Analog Converter (DAC) controls the pump, and relay code manages the timing to turn off mixing before feeding to prevent feed washout.
 
 ## Project Overview
 The control system introduced in this repository is designed to optimize the anaerobic digestion process by automating the control of feeding intervals based on the microbial activity in the reactor. By monitoring the current draw, which correlates with the bacterial metabolic rate, the FSM facilitates real-time adjustments to feeding based on changes in organic load.
